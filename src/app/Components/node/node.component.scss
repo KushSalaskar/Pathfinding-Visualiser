@@ -1,0 +1,13 @@
+.node {
+    display: inline-block;
+    padding: 10px;
+    /*content: "";*/
+    border : 1px solid #000000;
+    margin-bottom: -5px;
+    margin-right: -1px;
+
+}
+
+.isWall {
+    background-color: black;
+}

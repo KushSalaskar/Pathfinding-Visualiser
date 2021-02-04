@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { GridComponent } from './Components/grid/grid.component';
+import { NodeComponent } from './Components/node/node.component';
 
 @Component({
   selector: 'app-root',

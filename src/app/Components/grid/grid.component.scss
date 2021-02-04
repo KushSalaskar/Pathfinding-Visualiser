@@ -1,0 +1,51 @@
+.row, .col{
+    display: flex;
+}
+
+.row{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.grid-container{
+    margin: 0 auto;
+    // padding: 20px;
+    // width: 100%;
+}
+
+.button{
+    width: 100px;
+    height: 40px;
+    padding : 10px;
+    background-color: aquamarine;
+    color: black;
+}
+
+.wrapper{
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+
+.heading{
+	font-size: 32px;
+}
+
+.info{
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+
+    .detail{
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+}
+
+
+.node{
+    border: none;
+    margin: 0 10px;
+}

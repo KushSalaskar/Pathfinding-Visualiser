@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "PathfindingVisual"
+    }
+  },
+  "defaultProject": "PathfindingVisual",
+  "cli": {
+    "analytics": "f126507d-759b-494d-9400-84da8759d35d"
+  }
 }
