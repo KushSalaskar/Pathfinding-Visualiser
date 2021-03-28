@@ -9,6 +9,7 @@ export class BidirectionalSwarmAlgoService {
 
   constructor() { }
   startAnimation(nodes, startNode, endNode){
+    //not needed
     startNode.distance = 0
     endNode.endNodeDistance = 0
     let unvisitedNodesForStart: Array<Node> = []
