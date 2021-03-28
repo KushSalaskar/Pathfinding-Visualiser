@@ -13,17 +13,89 @@
     // width: 100%;
 }
 
+.top-bar{
+    position: fixed;
+    top: 0;
+    width: 98%;
+    margin-left: 0px;
+    display: flex;
+    left:0;
+    padding:1%;
+    justify-content: space-between;
+    background-color: #5B2D77;
+}
+
+.top-buttons{
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bottom-bar{
+    position: fixed;
+    bottom: 0;
+    margin-top: 15px; 
+    width: 98%;
+    margin-left: 0px;
+    display: flex;
+    left:0;
+    padding:1%;
+    justify-content: space-evenly;
+    background-color: #5B2D77;
+}
+
 .button{
-    width: 100px;
-    height: 40px;
-    padding : 10px;
-    background-color: aquamarine;
-    color: black;
+    padding: 5px 9px;
+    background-color: rgba(213, 213, 213, 0.5);
+    color: #5B2D77;
+    border-radius: 10px;
+    border: 0px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    width: auto;
+}
+
+.button:focus{
+    border: 0px;
+    outline: none;
+}
+.button:hover{
+    color:#c3c3c3;
+    background: none;
+}
+
+.button-disabled{
+    padding: 5px 9px;
+    background-color: gray;
+    color: #5B2D77;
+    border-radius: 10px;
+    border: 0px;
+    font-size: 18px;
+    font-weight: bold;
+    width: auto;
+}
+
+.button-main{
+    margin-top: 5px;
+    background: none;
+    border: 0px;
+    font-size: 25px;
+    font-weight: 600;
+    color: #ececec;
+    cursor: pointer;
+}
+.button-main:hover{
+    color: #c3c3c3;
+}
+.button-main:focus{
+    border: 0px;
+    outline:none;
 }
 
 .wrapper{
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 85px;
 }
 
 
@@ -31,21 +103,75 @@
 	font-size: 32px;
 }
 
-.info{
-    padding: 20px 10px;
-    display: flex;
-    justify-content: space-between;
-
-    .detail{
-        display: flex;
-        justify-content: space-between;
-    }
-
-
-}
 
 
 .node{
     border: none;
     margin: 0 10px;
+}
+
+//-----------------------Modal Styles---------------------------------------------
+
+.jw-modal-wrapper{
+    display: none;
+}
+
+.jw-modal {
+    /* modal container fixed across whole screen */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    /* z-index must be higher than .jw-modal-background */
+    z-index: 1000;
+    
+    /* enables scrolling for tall modals */
+    overflow: auto;
+}
+
+    .jw-modal-body {
+        padding: 20px;
+        background: #fff;
+        border: 5px solid #5B2D77;
+        border-radius: 10px;
+        /* margin exposes part of the modal background */
+        margin: 40px;
+    }
+    
+
+    .jw-modal-background {
+        /* modal background fixed across whole screen */
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        /* semi-transparent black  */
+        background-color: #000;
+        opacity: 0.75;
+        
+        /* z-index must be below .jw-modal and above everything else  */
+        z-index: 900;
+    }
+
+
+body.jw-modal-open {
+    /* body overflow is hidden to hide main scrollbar when modal window is open */
+    overflow: hidden;
+}
+
+.center-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #5B2D77;
+}
+
+.text{
+    font-size: 18px;
+    color: #5B2D77;
 }

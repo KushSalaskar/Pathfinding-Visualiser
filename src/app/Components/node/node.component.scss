@@ -1,13 +1,153 @@
 .node {
     display: inline-block;
-    padding: 10px;
-    /*content: "";*/
-    border : 1px solid #000000;
+    padding: 13px;
+    border : 1px solid #000000 !important;
     margin-bottom: -5px;
     margin-right: -1px;
 
 }
 
-.isWall {
-    background-color: black;
+.isStartNode{
+    animation-name: primaryNodeAnimation;
+    animation-duration: 1s;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    // background-color: green;
+    background-image: url("../../../assets/startTriangle.svg");
+    background-size: 100% 100%;
+    border-color: white !important;
 }
+
+
+.isEndNode{
+    animation-name: primaryNodeAnimation;
+    animation-duration: 1s;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    //background-color: red;
+    background-image: url("../../../assets/circle.svg");
+    background-size: 100% 100%;
+    border-color: white !important;
+}
+
+.isWall {
+    animation-name: wallanimation;
+    animation-duration: 0.2s;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    background-color: black;
+    
+}
+
+.isVisited{
+    animation-name: visitingNodeAnimation;
+    animation-duration: 1s;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    background-size: 100% 100%;
+    border-color: white !important;
+    background-color: rgb(13, 224, 224);
+}
+
+.VisitedWithoutAnimation{
+    border-color: white !important;
+    background-color: rgb(13, 224, 224);
+}
+
+.inPath{
+    animation-name: shortestPathAnimation;
+    animation-duration: 0.5s;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    background-size: 100% 100%;
+    border-color: rgb(238, 242, 15) !important;
+    background-color: rgb(238, 242, 15);
+}
+
+.PathWithoutAnimation{
+    transform: scale(1.0);
+    border-color: rgb(238, 242, 15) !important;
+    background-color: rgb(238, 242, 15);
+}
+
+@keyframes shortestPathAnimation{
+    0%{
+        transform: scale(0.3);
+    }
+    100%{
+        transform: scale(1.0);
+    }
+}
+
+@keyframes visitingNodeAnimation{
+    0%{
+        background-color: yellow;
+        border-radius: 100%;
+        transform: scale(0.4);
+    }
+    1%{
+        background-color: rgb(235, 14, 213);
+        border-radius: 100%;
+        transform: scale(0);
+    }
+    50%{
+        border-radius: 50%;
+        transform: scale(0.5);
+    }
+    100%{
+        border-radius: 0%;
+        transform: scale(1.0);
+    }
+}
+
+@keyframes primaryNodeAnimation{
+    0%{
+        
+        background-color: white;
+        transform: scale(0); 
+    }
+    1%{
+        transform: scale(0);
+    }
+    
+
+    55%{
+        transform: scale(0.92);
+    }
+    
+
+    100%{
+        transform: scale(0.85);
+    }
+}
+
+
+@keyframes wallanimation{
+    0%{
+        background-color: white
+    }
+    1%{
+        background-color: black;
+        transform: scale(0);
+    }
+    
+
+    75%{
+        transform: scale(1.1);
+    }
+    
+
+    100%{
+        
+        background-color: black;
+        transform: scale(1.0);
+    }
+}
+
+
+

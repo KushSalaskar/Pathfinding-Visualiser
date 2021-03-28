@@ -5,6 +5,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  HostListener,
   ViewChild,
   ElementRef,
   EventEmitter,
@@ -12,6 +13,7 @@ import {
 } from '@angular/core';
 import { MessageServiceService } from 'src/app/Services/message-service.service'
 import {Node} from '../../interfaces/node';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 
 @Component({
@@ -21,85 +23,93 @@ import {Node} from '../../interfaces/node';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NodeComponent implements OnInit, OnChanges {
-  @Input('node') node: Node;
-  @Input('isClicked') isClicked: boolean;
-  @Output('dropped') dropped: EventEmitter<any> = new EventEmitter<any>();
+  @Input('node') node: Node
+  @Output('dropped') dropped: EventEmitter<any> = new EventEmitter<any>()
 
-  isStartNode = false;
-  isEndNode = false;
+  isStartNode = false
+  isEndNode = false
+  
 
   @ViewChild('nodeel', { static: true }) nodeEl;
 
   constructor(
-    private messageService: MessageServiceService,
+    public messageService: MessageServiceService,
     private ref: ChangeDetectorRef,
     private elementRef: ElementRef
   ) {}
 
   ngOnInit() {
-    this.messageService.messages$.subscribe(
-      (message: Node) => {
-        console.log('M', message);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    
   }
 
   ngAfterViewInit() {}
 
   ngOnChanges(changes) {
-    console.log('changes ', changes);
   }
 
-  runChangeDetector() {
-    this.ref.markForCheck();
-  }
-
-  MouseUp(event: Event) {
-    console.log(event);
-    try {
-      var data = (event as any).dataTransfer.getData('text');
-      console.log(data, (event as any).data);
-      this.dropped.emit({
-        previousNode: JSON.parse(data),
-        newNode: this.node,
-      });
-    } catch (err) {
-      console.error(err);
+  @HostListener('mouseenter', ['$event']) onmouseenter(event: Event) {
+    if(this.messageService.GetAnimationState() === true){
+      event.stopPropagation()
+      event.preventDefault()
+      event.stopImmediatePropagation()
+      return
     }
-  }
-
-  MouseDown(event: Event) {
-    if (this.node.isStartNode || this.node.isEndNode) {
-      this.messageService.MouseRelease();
-      // event.preventDefault();
-      event.stopPropagation();
-
-      return;
-    }
-    this.node.isWall = !this.node.isWall;
-  }
-
-  CreateWall(event) {
-    console.log('inside', this.isClicked);
+    
     if (
-      this.messageService.GetMouseClicked() == true &&
+      this.messageService.GetNodeForWall() == true &&
       !this.node.isEndNode &&
       !this.node.isStartNode
     ) {
-      this.node.isWall = !this.node.isWall;
+      this.node.isWall = !this.node.isWall
+     }
+
+
+    if(this.messageService.GetPrimaryNodeClicked() === true){
+      if(this.node.isWall){
+        return
+      }
+      let prevNode = this.messageService.GetNodeData()
+      let newNode:Node = this.node
+      this.messageService.SetNodeData(this.node)
+      this.dropped.emit({
+        previousNode: prevNode,
+        newNode: newNode,
+      })
     }
+    
   }
 
-  DragCancel(event: Event) {
-    event.preventDefault();
+  runChangeDetector() {
+    this.ref.markForCheck()
   }
 
-  DragStart(event) {
-    event.dataTransfer.setData('text/plain', JSON.stringify(this.node));
-    event.data = this.node;
+  MouseUp(event: Event) {
+    if(this.messageService.GetAnimationState() === true){
+      event.stopPropagation()
+      event.preventDefault()
+      event.stopImmediatePropagation()
+      return
+    }
+      this.messageService.MouseRelease()
+      this.messageService.PrimaryNodeReleased()
+      this.messageService.ReleasedForWall()
+      
+  }
+
+  MouseDown(event: Event) {
+    if(this.messageService.GetAnimationState() === true){
+      event.stopPropagation()
+      event.preventDefault()
+      event.stopImmediatePropagation()
+      return
+    }
+
+    if (this.node.isStartNode || this.node.isEndNode) {
+      this.messageService.PrimaryNodeClicked()
+      this.messageService.SetNodeData(this.node)
+      return
+    }
+    this.messageService.ClickedForWall()
+    this.node.isWall = !this.node.isWall
   }
 }
-

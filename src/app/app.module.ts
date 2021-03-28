@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GridComponent } from './Components/grid/grid.component';
 import { NodeComponent } from './Components/node/node.component';
+import { DijkstraAlgoService } from './Algorithms/dijkstra-algo.service'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { NodeComponent } from './Components/node/node.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DijkstraAlgoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

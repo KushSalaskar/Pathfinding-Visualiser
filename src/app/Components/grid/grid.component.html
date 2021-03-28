@@ -1,7 +1,44 @@
-<div class="wrapper" (mousedown)="MouseDown($event)" (mouseup)="MouseUp($event)" >
+<div class = "top-bar">
+    <div>
+        <button [ngClass] = "'button-main'" (click) = "openModal()" [disabled]="this.messageService.GetAnimationState()">Pathfinding Visualiser</button>
+    
+    </div>
+    <div class="top-buttons">
+        <button [ngClass] = "this.messageService.GetAnimationState() ? 'button-disabled' : 'button'" (click) = "Reset($event)" [disabled]="this.messageService.GetAnimationState()">Clear Grid</button>
+        <button [ngClass] = "this.messageService.GetAnimationState() ? 'button-disabled' : 'button'" (click) = "ClearPath($event)" [disabled]="this.messageService.GetAnimationState()">Clear Path</button>
+        <button [ngClass] = "this.messageService.GetAnimationState() ? 'button-disabled' : 'button'" (click) = "ClearWallsAndPath($event)" [disabled]="this.messageService.GetAnimationState()">Clear Path and Walls</button>
+    </div>    
+</div>
+
+<div class = "jw-modal-wrapper" id="modal">
+    <div class="jw-modal">
+        <div class="jw-modal-body">
+            <h1 class="center-text">Welcome to Pathfinding Visualiser!</h1>
+            <p class="text">Pathfinding Visualiser is a visual representation of three popular Pathfinding Algorithms and is an interactive way to learn how these algorithms work.</p>
+            <p class="text">You can move the <b><i>"Start Node"</i></b> and the <b><i>"End Node"</i></b> by clicking on them and dragging them to a desired location on the Grid.</p>
+            <p class="text">You can click on any node on the grid which is not the Start Node or the End Node to turn that node into a <b><i>Wall</i></b>. The algorithm avoids walls and finds a path around them if there exists such a path.</p>
+            <p class="text">Once the algorithm has finished finding the shortest path, you can drag the End Node to instantly generate a new path to the new End Node position.</p>
+            <p class="text">You can also press the <b><i>Random Maze</i></b> button to instantly generate a random maze.</p>
+            <p class="text">For reference and source code you check it on my <a href="https://github.com/KushSalaskar" target="_blank"><b><i>GitHub</i></b></a></p>
+            <p><button class="button" (click) = "closeModal()">Skip Tutorial</button></p>
+        </div>
+    </div>
+    <div class="jw-modal-background"></div>
+</div>
+
+
+<div class="wrapper" (mousedown)="MouseDown($event)" (mouseup)="MouseUp($event)" [attr.disabled]="this.messageService.GetAnimationState()" >
     <div *ngFor="let r of [].constructor(rows);let rn = index;" class="row">
         <div *ngFor = "let c of [].constructor(cols);let cn= index" class="col" >
             <app-node #node [node]="nodes[rn][cn]"  (dropped) = "Drop($event)" ></app-node>
         </div>
     </div>
+</div>
+
+<div class = "bottom-bar">
+    <button [ngClass] = "this.messageService.AnimationOnBoardInfo() ? 'button-disabled' : 'button'" (click) = "RandomMaze($event)" [disabled]="this.messageService.AnimationOnBoardInfo()">Random Maze</button>
+    <button [ngClass] = "this.messageService.AnimationOnBoardInfo() ? 'button-disabled' : 'button'" (click) = "animateDijkstras()" [disabled]="this.messageService.AnimationOnBoardInfo()">Dijkstras</button>
+    <button [ngClass] = "this.messageService.AnimationOnBoardInfo() ? 'button-disabled' : 'button'" (click) = "animateAstar()" [disabled]="this.messageService.AnimationOnBoardInfo()">A*</button>
+    <button [ngClass] = "this.messageService.AnimationOnBoardInfo() ? 'button-disabled' : 'button'" (click) = "animateDFS()" [disabled]="this.messageService.AnimationOnBoardInfo()">DFS</button>
+    <!-- <button class="button" (click) = "animateBidirectionalSwarm()">Bidirectional Swarm</button> -->
 </div>
