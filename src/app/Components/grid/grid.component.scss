@@ -54,6 +54,7 @@
     font-size: 18px;
     font-weight: bold;
     width: auto;
+    transition: 0.3s;
 }
 
 .button:focus{
@@ -62,6 +63,8 @@
 }
 .button:hover{
     color:#c3c3c3;
+    // border: 1px solid;
+    // border-color: #c3c3c3;
     background: none;
 }
 
@@ -84,6 +87,7 @@
     font-weight: 600;
     color: #ececec;
     cursor: pointer;
+    transition: 0.2s;
 }
 .button-main:hover{
     color: #c3c3c3;
@@ -91,6 +95,12 @@
 .button-main:focus{
     border: 0px;
     outline:none;
+}
+
+.font-styles{
+    font-size: 25px;
+    font-weight: 600;
+    color: #ececec;
 }
 
 .wrapper{

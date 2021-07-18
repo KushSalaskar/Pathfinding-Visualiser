@@ -37,6 +37,7 @@
 
 <div class = "bottom-bar">
     <button [ngClass] = "this.messageService.AnimationOnBoardInfo() ? 'button-disabled' : 'button'" (click) = "RandomMaze($event)" [disabled]="this.messageService.AnimationOnBoardInfo()">Random Maze</button>
+    <p class="font-styles">Algorithms:</p>
     <button [ngClass] = "this.messageService.AnimationOnBoardInfo() ? 'button-disabled' : 'button'" (click) = "animateDijkstras()" [disabled]="this.messageService.AnimationOnBoardInfo()">Dijkstras</button>
     <button [ngClass] = "this.messageService.AnimationOnBoardInfo() ? 'button-disabled' : 'button'" (click) = "animateAstar()" [disabled]="this.messageService.AnimationOnBoardInfo()">A*</button>
     <button [ngClass] = "this.messageService.AnimationOnBoardInfo() ? 'button-disabled' : 'button'" (click) = "animateDFS()" [disabled]="this.messageService.AnimationOnBoardInfo()">DFS</button>
